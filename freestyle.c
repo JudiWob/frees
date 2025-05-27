@@ -6,7 +6,9 @@ char *get_next_line(int fd)
 	static char	*buffer;
 	char 		*rest;
 	char		*line;
+	char 		*temp;
 	int			bytes_read;
+	int 		i;
 	
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
@@ -35,9 +37,32 @@ char *get_next_line(int fd)
 			return (NULL);
 		}
 	}
-	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))
-
-
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if(!buffer)
+		return(NULL);
+	//while(nl_check(line) == 0)
+	//{
+	//	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	//	if(bytes_read < 1)
+	//		return (NULL);
+	//	if(bytes_read == 0)
+	//	{
+	//		free(buffer);
+	//		return(line);
+	//	}
+	//	temp = ft_strjoin(line, buffer);
+	//	if(!temp)
+	//		return(NULL);
+	//	free(line);
+	//	line = temp;
+	//}
+	//i = 0;
+	//while(line[i] && line[i] != '\n')
+	//	i++;
+	//rest = ft_strdup(&line[i+1]);
+	//line[i+1] = '\0';
+	//free(buffer);
+	return(line);
 
 }
 
@@ -59,7 +84,7 @@ int main()
 		printf("%s", line);
 		free(line);
 	}
-		line = get_next_line(fd);
+	line = get_next_line(fd);
 	if (line)
 	{
 		printf("%s", line);
