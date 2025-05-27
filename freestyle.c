@@ -1,6 +1,46 @@
 #include "header.h"
 
 
+char *get_next_line(int fd)
+{
+	static char	*buffer;
+	char 		*rest;
+	char		*line;
+	int			bytes_read;
+	
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	{
+		if(rest)
+		{
+			free(rest);
+			rest = NULL;
+		}
+		return (NULL);
+	}
+	if(rest)
+	{
+		line = ft_strdup(rest);
+		if (!line)
+		{
+			return (NULL);
+		}
+		free(rest);
+		rest = NULL;
+	}
+	else
+	{
+		line = ft_strdup("");
+		if (!line)
+		{
+			return (NULL);
+		}
+	}
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))
+
+
+
+}
+
 int main()
 {
 	int fd;
@@ -36,28 +76,6 @@ int main()
 	return (0);
 }
 
-
-char *get_next_line(int fd)
-{
-	static char	*buffer;
-	char 		*rest;
-	char		*line;
-	int			bytes_read;
-	
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-	{
-		if(rest)
-		{
-			free(rest);
-			rest = NULL;
-		}
-		return (NULL);
-	}
-	
-	
-}
-
-
 int nl_check(char *s)
 {
 	int i;
@@ -74,7 +92,7 @@ int nl_check(char *s)
 	return (0);
 }
 
-char	*ft_strdup(const char *s)
+char	*ft_strdup(char *s)
 {
 	size_t	len;
 	size_t	i;
@@ -120,7 +138,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (new);
 }
 
-int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
 	int	i;
 
