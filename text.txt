@@ -1,0 +1,14 @@
+yJBc.aj
+f the Posix and Standard Unix Specification standardization efforts. Thus,
+the material in this book applies almost directly to these “Unix-like” operating
+systems.
+The text contains numerous programming examples that have been compiled
+and run on Linux systems. We assume that you have access to such a machine, and
+are able to log in and do simple things such as listing files and changing directories. If your computer runs Microsoft Windows, we recommend that you install
+one of the many different virtual machine environments (such as VirtualBox or
+VMWare) that allow programs written for one operating system (the guest OS)
+to run under another (the host OS).
+We also assume that you have some familiarity with C or C++. If your only
+prior experience is with Java, the transition will require more effort on your part,
+but we will help you. Java and C share similar syntax and control statements.
+However, there are aspects of C (particular
