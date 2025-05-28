@@ -1,10 +1,10 @@
-#include "header.h"
+#include "free_header.h"
 
 
 char *get_next_line(int fd)
 {
-	static char	*buffer;
-	char 		*rest;
+	char		*buffer;
+	static char *rest;
 	char		*line;
 	char 		*temp;
 	int			bytes_read;
@@ -40,28 +40,35 @@ char *get_next_line(int fd)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if(!buffer)
 		return(NULL);
-	//while(nl_check(line) == 0)
-	//{
-	//	bytes_read = read(fd, buffer, BUFFER_SIZE);
-	//	if(bytes_read < 1)
-	//		return (NULL);
-	//	if(bytes_read == 0)
-	//	{
-	//		free(buffer);
-	//		return(line);
-	//	}
-	//	temp = ft_strjoin(line, buffer);
-	//	if(!temp)
-	//		return(NULL);
-	//	free(line);
-	//	line = temp;
-	//}
-	//i = 0;
-	//while(line[i] && line[i] != '\n')
-	//	i++;
-	//rest = ft_strdup(&line[i+1]);
-	//line[i+1] = '\0';
-	//free(buffer);
+	while(nl_check(line) == 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if(bytes_read < 0)
+			return (NULL);
+		if(bytes_read == 0)
+		{
+			free(buffer);
+			if(line[0] == '\0')
+			{
+				printf("HERE");
+				free(line);
+				return(NULL);
+			}
+			return(line);
+		}
+		buffer[bytes_read] = '\0';
+		temp = ft_strjoin(line, buffer);
+		if(!temp)
+			return(NULL);
+		free(line);
+		line = temp;
+	}
+	i = 0;
+	while(line[i] && line[i] != '\n')
+		i++;
+	rest = ft_strdup(&line[i+1]);
+	line[i+1] = '\0';
+	free(buffer);
 	return(line);
 
 }
